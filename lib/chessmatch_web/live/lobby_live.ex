@@ -2,7 +2,7 @@ defmodule ChessmatchWeb.LobbyLive do
   use ChessmatchWeb, :live_view
 
   def redirect_to_game(pid, game_id) do
-    GenServer.call(pid, {:redirect_to_game, game_id})
+    Process.send(pid, {:redirect_to_game, game_id}, [])
   end
 
   @impl true
@@ -17,7 +17,7 @@ defmodule ChessmatchWeb.LobbyLive do
   end
 
   @impl true
-  def handle_call({:redirect_to_game, game_id}, _, socket) do
+  def handle_info({:redirect_to_game, game_id}, socket) do
     {:noreply,
      push_redirect(socket, to: Routes.live_path(socket, ChessmatchWeb.ChessGameLive, game_id))}
   end

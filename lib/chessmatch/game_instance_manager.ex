@@ -20,7 +20,11 @@ defmodule Chessmatch.GameInstanceManager do
 
     case queue do
       [p1, p2 | queue] ->
-        new_game_instance = Chessmatch.GameInstance.new()
+        {:ok, new_game_instance} =
+          DynamicSupervisor.start_child(
+            Chessmatch.GameInstanceSupervisor,
+            Chessmatch.GameInstance
+          )
 
         black_id = :rand.uniform(1_000_000)
         white_id = :rand.uniform(1_000_000)
