@@ -7,6 +7,8 @@ defmodule Chessmatch.Application do
 
   def start(_type, _args) do
     children = [
+      {DynamicSupervisor, name: Chessmatch.GameInstanceSupervisor, strategy: :one_for_one},
+      {Chessmatch.GameInstanceManager, name: Chessmatch.GameInstanceManager},
       # Start the Telemetry supervisor
       ChessmatchWeb.Telemetry,
       # Start the PubSub system
