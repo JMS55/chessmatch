@@ -1,10 +1,13 @@
 1. Implement GameInstance.get_possible_moves()
 2. Update GameLive to handle moving pieces
-3. Implement GameLive.notify_game_updated()
-4. Implement GameInstance.move_piece()
+3. Implement GameInstance.move_piece()
+    * Send new state to subscribers
+4. Implement more complex rules of chess (pawn advancing by 2, check, checkmate, etc)
 
 1. Handle non-existant routes, games, parsing errors, clicking queue up twice, etc
 2. Improve frontend design
     * Flip chessboard orientation for black
-3. Delete GameInstances 20m after no move_piece() calls, or game ending
-4. Make sure things can't be DDOS'd
+    * Button press and focus styling
+    * Board vs piece contrast
+3. Delete GameInstances 30m after no move_piece() calls
+4. Rate limiting

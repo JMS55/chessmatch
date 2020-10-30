@@ -8,10 +8,10 @@ defmodule ChessmatchWeb.GameLive do
     {:ok, {role, game_instance_pid}} = Chessmatch.GameInstanceManager.get_game_info(game_id)
     Chessmatch.GameInstance.subscribe_to_changes(game_instance_pid)
 
-    {game_state, board} = Chessmatch.GameInstance.get_state(game_instance_pid)
+    {game_status, board, possible_moves} = Chessmatch.GameInstance.get_state(game_instance_pid, role)
 
     socket =
-      socket |> assign(:role, role) |> assign(:game_state, game_state) |> assign(:board, board)
+      socket |> assign(:role, role) |> assign(:game_status, game_status) |> assign(:board, board) |> assign(:possible_moves, possible_moves)
 
     {:ok, socket}
   end
