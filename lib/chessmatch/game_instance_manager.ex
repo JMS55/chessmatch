@@ -9,6 +9,10 @@ defmodule Chessmatch.GameInstanceManager do
     GenServer.cast(__MODULE__, {:queue_up, self()})
   end
 
+  def get_game_info(game_id) do
+    GenServer.call(__MODULE__, {:get_game_info, game_id})
+  end
+
   @impl true
   def init(:ok) do
     {:ok, {[], %{}}}
@@ -43,6 +47,17 @@ defmodule Chessmatch.GameInstanceManager do
 
       _ ->
         {:noreply, {queue, games}}
+    end
+  end
+
+  @impl true
+  def handle_call({:get_game_info, game_id}, _, {queue, games}) do
+    game_info = games[game_id]
+
+    if game_info != nil do
+      {:reply, {:ok, game_info}, {queue, games}}
+    else
+      {:reply, {:error, :game_not_found}, {queue, games}}
     end
   end
 end

@@ -19,6 +19,6 @@ defmodule ChessmatchWeb.LobbyLive do
   @impl true
   def handle_info({:redirect_to_game, game_id}, socket) do
     {:noreply,
-     push_redirect(socket, to: Routes.live_path(socket, ChessmatchWeb.ChessGameLive, game_id))}
+     push_redirect(socket, to: Routes.live_path(socket, ChessmatchWeb.GameLive, game_id))}
   end
 end
