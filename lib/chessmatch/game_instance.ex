@@ -17,7 +17,7 @@ defmodule Chessmatch.GameInstance do
   def init(:ok) do
     {:ok,
      {:white_turn,
-      {
+      [
         {:rook, :black},
         {:knight, :black},
         {:bishop, :black},
@@ -82,7 +82,7 @@ defmodule Chessmatch.GameInstance do
         {:bishop, :white},
         {:knight, :white},
         {:rook, :white}
-      }, []}}
+      ], []}}
   end
 
   @impl true

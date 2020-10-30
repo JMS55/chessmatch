@@ -1,69 +1,32 @@
 <div class="w-screen h-screen bg-gradient-to-r from-teal-400 to-blue-500 flex flex-col items-center">
-  <p class="h-1/5 font-sans font-bold text-5xl text-center my-5">Black's Turn</p>
+  <p class="h-1/5 font-sans font-bold text-5xl text-center my-5">
+    <%= case @game_state do %>
+      <% :black_turn -> %> Black's Turn
+      <% :white_turn -> %> White's turn
+      <% :black_won -> %> Black Wins!
+      <% :white_won -> %> White Wins!
+      <% _ -> %>
+    <% end %>
+  </p>
   <div class="max-w-3xl grid grid-cols-8 gap-3">
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-700 rounded shadow-xl text-3xl text-white"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-700 rounded shadow-xl text-3xl text-white"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-700 rounded shadow-xl text-3xl text-white"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-700 rounded shadow-xl text-3xl text-white"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
-    <button disabled class="w-20 h-20 bg-gray-200 rounded shadow-xl text-3xl text-black"><span class="fas fa-chess-rook"></span></button>
+    <%= for {{piece, color}, i} <- Enum.with_index(@board) do %>
+      <button disabled
+
+        class="w-20 h-20 <%= if rem(i, 2) == rem(div(i, 8), 2) do %> bg-gray-200 <% else %> bg-gray-700 <% end %>
+        rounded shadow-xl text-4xl
+        <%= if color == :black do %> text-black <% else %> text-white <% end %>">
+
+          <%= case piece do %>
+            <% :pawn -> %> <span class="fas fa-chess-pawn"></span>
+            <% :rook -> %> <span class="fas fa-chess-rook"></span>
+            <% :knight -> %> <span class="fas fa-chess-knight"></span>
+            <% :bishop -> %> <span class="fas fa-chess-bishop"></span>
+            <% :queen -> %> <span class="fas fa-chess-queen"></span>
+            <% :king -> %> <span class="fas fa-chess-king"></span>
+            <% _ -> %>
+          <% end %>
+
+      </button>
+    <% end %>
   </div>
 </div>
