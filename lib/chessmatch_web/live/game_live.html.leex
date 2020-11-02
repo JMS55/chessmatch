@@ -1,15 +1,7 @@
 <div class="w-screen h-screen bg-gradient-to-r from-teal-400 to-blue-500 flex flex-col items-center">
-  <p class="h-1/5 font-sans font-bold text-5xl text-center my-5">
-    <%= case @game_status do %>
-      <% :black_turn -> %> Black's Turn
-      <% :white_turn -> %> White's turn
-      <% :black_won -> %> Black Wins!
-      <% :white_won -> %> White Wins!
-      <% _ -> %>
-    <% end %>
-  </p>
+  <p class="h-1/5 font-sans font-bold text-5xl text-center my-5"> <%= @game_message %> </p>
   <div class="max-w-3xl grid grid-cols-8 gap-3">
-    <%= for {{piece, color}, i} <- @board |> Tuple.to_list() |> Enum.with_index() do %>
+    <%= for {{piece, color}, i} <- Enum.with_index(@piece_list) do %>
       <button
         <%= if not Map.has_key?(@possible_moves, i) do %> disabled <% end %>
 

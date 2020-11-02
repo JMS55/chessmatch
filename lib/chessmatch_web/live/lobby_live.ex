@@ -11,7 +11,7 @@ defmodule ChessmatchWeb.LobbyLive do
   end
 
   @impl true
-  def handle_event("queue_up", _unsigned_params, socket) do
+  def handle_event("find_game", _unsigned_params, socket) do
     Chessmatch.GameInstanceManager.queue_up()
     {:noreply, socket}
   end

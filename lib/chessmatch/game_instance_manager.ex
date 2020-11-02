@@ -24,11 +24,8 @@ defmodule Chessmatch.GameInstanceManager do
 
     case queue do
       [p1, p2 | queue] ->
-        {:ok, new_game_instance} =
-          DynamicSupervisor.start_child(
-            Chessmatch.GameInstanceSupervisor,
-            Chessmatch.GameInstance
-          )
+        {:ok, game_instance} = :binbo.new_server()
+        {:ok, _} = :binbo.new_game(game_instance)
 
         black_id = :rand.uniform(1_000_000)
         white_id = :rand.uniform(1_000_000)
@@ -36,9 +33,9 @@ defmodule Chessmatch.GameInstanceManager do
 
         games =
           games
-          |> Map.put(black_id, {:black, new_game_instance})
-          |> Map.put(white_id, {:white, new_game_instance})
-          |> Map.put(spectator_id, {:spectator, new_game_instance})
+          |> Map.put(black_id, {:black, game_instance})
+          |> Map.put(white_id, {:white, game_instance})
+          |> Map.put(spectator_id, {:spectator, game_instance})
 
         ChessmatchWeb.LobbyLive.redirect_to_game(p1, black_id)
         ChessmatchWeb.LobbyLive.redirect_to_game(p2, white_id)
