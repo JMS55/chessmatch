@@ -1,7 +1,13 @@
 1. Update GameLive to support moving pieces
-2. Handle non-existant routes, games, parsing errors, clicking find game twice, etc
-3. Improve frontend design
+    * Implement move_piece()
+2. Spectator link
+3. Handle non-existant routes, games, parsing errors, clicking find game twice, etc
+4. Improve frontend design
     * Button press and focus styling
     * Board vs piece contrast
     * Animation while finding game
-4. Create game instances with timeouts
+    * Favicon
+    * Sound/Music
+5. Create game instances with timeouts
+6. Mobile support
+7. Update README and Github about section

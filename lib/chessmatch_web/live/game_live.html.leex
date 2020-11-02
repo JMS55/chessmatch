@@ -1,14 +1,19 @@
 <div class="w-screen h-screen bg-gradient-to-r from-teal-400 to-blue-500 flex flex-col items-center">
   <p class="h-1/5 font-sans font-bold text-5xl text-center my-5"> <%= @game_message %> </p>
   <div class="max-w-3xl grid grid-cols-8 gap-3">
-    <%= for {{piece, color}, i} <- Enum.with_index(@piece_list) do %>
+    <%= for {{piece, color}, i} <- @piece_list do %>
       <button
-        <%= if not Map.has_key?(@possible_moves, i) do %> disabled <% end %>
+        <%= if selectable?(i, @selection, @possible_moves) do %>
+          phx-click="make_selection" phx-value-selection=<%= i %>
+        <% else %>
+          disabled
+        <% end %>
 
         class="w-20 h-20 <%= if rem(i, 2) == rem(div(i, 8), 2) do %> bg-gray-300 <% else %> bg-gray-700 <% end %>
         rounded shadow-xl text-4xl
-        <%= if color == :black do %> text-black <% else %> text-white <% end %>">
-
+        <%= if color == :black do %> text-black <% else %> text-white <% end %>
+        <%= if selectable?(i, @selection, @possible_moves) do %> border-4 border-purple-600 <% end %>
+        ">
           <%= case piece do %>
             <% :pawn -> %> <span class="fas fa-chess-pawn"></span>
             <% :rook -> %> <span class="fas fa-chess-rook"></span>
@@ -18,7 +23,6 @@
             <% :king -> %> <span class="fas fa-chess-king"></span>
             <% _ -> %>
           <% end %>
-
       </button>
     <% end %>
   </div>

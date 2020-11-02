@@ -8,11 +8,35 @@ defmodule ChessmatchWeb.GameLive do
     {:ok, {role, game_instance}} = Chessmatch.GameInstanceManager.get_game_info(game_id)
 
     socket =
-      socket |> assign(:role, role) |> assign(:game_instance, game_instance) |> update_state()
+      socket
+      |> assign(:role, role)
+      |> assign(:game_instance, game_instance)
+      |> assign(:selection, {nil, nil})
+      |> update_state()
 
     Process.send_after(self(), :update_state, 1000)
 
     {:ok, socket}
+  end
+
+  @impl true
+  def handle_event("make_selection", %{"selection" => selection}, socket) do
+    {selection, _} = Integer.parse(selection)
+
+    selection =
+      case socket.assigns.selection do
+        {nil, nil} ->
+          {selection, nil}
+
+        {from, nil} when from == selection ->
+          {nil, nil}
+
+        {from, nil} ->
+          move_piece({from, selection}, socket.assigns.game_instance)
+          {nil, nil}
+      end
+
+    {:noreply, assign(socket, :selection, selection)}
   end
 
   @impl true
@@ -33,9 +57,9 @@ defmodule ChessmatchWeb.GameLive do
 
     piece_list =
       if socket.assigns.role == :black do
-        Enum.reverse(parse_fen(fen))
+        parse_fen(fen) |> Enum.with_index() |> Enum.reverse()
       else
-        parse_fen(fen)
+        parse_fen(fen) |> Enum.with_index()
       end
 
     possible_moves =
@@ -155,9 +179,23 @@ defmodule ChessmatchWeb.GameLive do
   defp parse_legal_moves(legal_moves) do
     Enum.reduce(legal_moves, %{}, fn move, acc ->
       case move do
-        {from, to} -> Map.update(acc, 63 - from, [], fn list -> list ++ [63 - to] end)
-        {from, to, _} -> Map.update(acc, 63 - from, [], fn list -> list ++ [63 - to] end)
+        {from, to} ->
+          Map.update(acc, 63 - from, MapSet.new(), fn set -> MapSet.put(set, 63 - to) end)
+
+        {from, to, _} ->
+          Map.update(acc, 63 - from, MapSet.new(), fn set -> MapSet.put(set, 63 - to) end)
       end
     end)
+  end
+
+  defp move_piece({from, to}, game_instance) do
+  end
+
+  defp selectable?(i, selection, possible_moves) do
+    case selection do
+      {nil, nil} -> Map.has_key?(possible_moves, i)
+      {from, nil} -> i == from or MapSet.member?(possible_moves[from], i)
+      _ -> false
+    end
   end
 end
