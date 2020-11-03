@@ -20,7 +20,36 @@ defmodule ChessmatchWeb.GameLive do
   end
 
   @impl true
-  def handle_event("make_selection", %{"selection" => selection}, socket) do
+  def handle_info(:update_state, socket) do
+    socket = update_state(socket)
+    Process.send_after(self(), :update_state, 1000)
+    {:noreply, socket}
+  end
+
+  defp update_state(socket) do
+    game_instance = socket.assigns.game_instance
+
+    {:ok, game_status} = :binbo.game_status(game_instance)
+    {:ok, side_to_move} = :binbo.side_to_move(game_instance)
+
+    game_message = parse_game_status(game_status, side_to_move)
+    piece_list = Chessmatch.BinboHelper.get_piece_list(socket.assigns.role, game_instance)
+
+    possible_moves =
+      if socket.assigns.role == side_to_move do
+        Chessmatch.BinboHelper.get_possible_moves(game_instance)
+      else
+        %{}
+      end
+
+    socket
+    |> assign(:game_message, game_message)
+    |> assign(:piece_list, piece_list)
+    |> assign(:possible_moves, possible_moves)
+  end
+
+  @impl true
+  def handle_event("select_piece", %{"selection" => selection}, socket) do
     {selection, _} = Integer.parse(selection)
 
     case socket.assigns.selection do
@@ -31,53 +60,11 @@ defmodule ChessmatchWeb.GameLive do
         {:noreply, assign(socket, :selection, {nil, nil})}
 
       {from, nil} ->
-        move = convert_piece(from) <> convert_piece(selection)
-        :binbo.move(socket.assigns.game_instance, move)
+        Chessmatch.BinboHelper.move_with_indices(from, selection, socket.assigns.game_instance)
 
         socket = socket |> update_state() |> assign(:selection, {nil, nil})
         {:noreply, socket}
     end
-  end
-
-  @impl true
-  def handle_info(:update_state, socket) do
-    Process.send_after(self(), :update_state, 1000)
-    {:noreply, update_state(socket)}
-  end
-
-  defp update_state(socket) do
-    game_instance = socket.assigns.game_instance
-
-    {:ok, game_status} = :binbo.game_status(game_instance)
-    {:ok, side_to_move} = :binbo.side_to_move(game_instance)
-    {:ok, legal_moves} = :binbo.all_legal_moves(game_instance)
-    {:ok, fen} = :binbo.get_fen(game_instance)
-
-    game_message = parse_game_status(game_status, side_to_move)
-
-    piece_list =
-      if socket.assigns.role == :white do
-        parse_fen(fen)
-        |> Enum.with_index()
-        |> Enum.map(fn {piece, i} -> {piece, div(63 - i, 8) * 8 + (7 - rem(63 - i, 8))} end)
-      else
-        parse_fen(fen)
-        |> Enum.with_index()
-        |> Enum.map(fn {piece, i} -> {piece, div(63 - i, 8) * 8 + (7 - rem(63 - i, 8))} end)
-        |> Enum.reverse()
-      end
-
-    possible_moves =
-      if socket.assigns.role == side_to_move do
-        parse_legal_moves(legal_moves)
-      else
-        %{}
-      end
-
-    socket
-    |> assign(:game_message, game_message)
-    |> assign(:piece_list, piece_list)
-    |> assign(:possible_moves, possible_moves)
   end
 
   defp parse_game_status(game_status, side_to_move) do
@@ -107,121 +94,6 @@ defmodule ChessmatchWeb.GameLive do
       {:draw, {:manual, _}} ->
         "Draw - Manual"
     end
-  end
-
-  defp parse_fen(fen, piece_list \\ []) do
-    {c, tail} = String.next_grapheme(fen)
-
-    case c do
-      " " ->
-        piece_list
-
-      "/" ->
-        parse_fen(tail, piece_list)
-
-      "1" ->
-        parse_fen(tail, piece_list ++ List.duplicate({nil, nil}, 1))
-
-      "2" ->
-        parse_fen(tail, piece_list ++ List.duplicate({nil, nil}, 2))
-
-      "3" ->
-        parse_fen(tail, piece_list ++ List.duplicate({nil, nil}, 3))
-
-      "4" ->
-        parse_fen(tail, piece_list ++ List.duplicate({nil, nil}, 4))
-
-      "5" ->
-        parse_fen(tail, piece_list ++ List.duplicate({nil, nil}, 5))
-
-      "6" ->
-        parse_fen(tail, piece_list ++ List.duplicate({nil, nil}, 6))
-
-      "7" ->
-        parse_fen(tail, piece_list ++ List.duplicate({nil, nil}, 7))
-
-      "8" ->
-        parse_fen(tail, piece_list ++ List.duplicate({nil, nil}, 8))
-
-      "p" ->
-        parse_fen(tail, piece_list ++ [{:pawn, :black}])
-
-      "n" ->
-        parse_fen(tail, piece_list ++ [{:knight, :black}])
-
-      "b" ->
-        parse_fen(tail, piece_list ++ [{:bishop, :black}])
-
-      "r" ->
-        parse_fen(tail, piece_list ++ [{:rook, :black}])
-
-      "q" ->
-        parse_fen(tail, piece_list ++ [{:queen, :black}])
-
-      "k" ->
-        parse_fen(tail, piece_list ++ [{:king, :black}])
-
-      "P" ->
-        parse_fen(tail, piece_list ++ [{:pawn, :white}])
-
-      "N" ->
-        parse_fen(tail, piece_list ++ [{:knight, :white}])
-
-      "B" ->
-        parse_fen(tail, piece_list ++ [{:bishop, :white}])
-
-      "R" ->
-        parse_fen(tail, piece_list ++ [{:rook, :white}])
-
-      "Q" ->
-        parse_fen(tail, piece_list ++ [{:queen, :white}])
-
-      "K" ->
-        parse_fen(tail, piece_list ++ [{:king, :white}])
-    end
-  end
-
-  defp parse_legal_moves(legal_moves) do
-    Enum.reduce(legal_moves, %{}, fn move, acc ->
-      case move do
-        {from, to} ->
-          Map.update(acc, from, MapSet.new([to]), fn set -> MapSet.put(set, to) end)
-
-        {from, to, _} ->
-          Map.update(acc, from, MapSet.new([to]), fn set -> MapSet.put(set, to) end)
-      end
-    end)
-  end
-
-  defp convert_piece(i) do
-    x = rem(i, 8)
-    y = div(i, 8)
-
-    letter =
-      case x do
-        0 -> "a"
-        1 -> "b"
-        2 -> "c"
-        3 -> "d"
-        4 -> "e"
-        5 -> "f"
-        6 -> "g"
-        7 -> "h"
-      end
-
-    number =
-      case y do
-        0 -> "1"
-        1 -> "2"
-        2 -> "3"
-        3 -> "4"
-        4 -> "5"
-        5 -> "6"
-        6 -> "7"
-        7 -> "8"
-      end
-
-    letter <> number
   end
 
   defp selectable?(i, selection, possible_moves) do

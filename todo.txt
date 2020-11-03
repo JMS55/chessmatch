@@ -9,3 +9,4 @@
 4. Create game instances with timeouts
 5. Mobile support
 6. Update README and Github about section
+7. Add building release instructions
