@@ -1,12 +1,11 @@
-1. Fix moving pieces being mirrored
-2. Spectator link
-3. Handle non-existant routes, games, parsing errors, clicking find game twice, etc
-4. Improve frontend design
+1. Spectator link
+2. Handle non-existant routes, games, parsing errors, clicking find game twice, etc
+3. Improve frontend design
     * Button press and focus styling
     * Board vs piece contrast
     * Animation while finding game
     * Favicon
     * Sound/Music
-5. Create game instances with timeouts
-6. Mobile support
-7. Update README and Github about section
+4. Create game instances with timeouts
+5. Mobile support
+6. Update README and Github about section

@@ -59,11 +59,11 @@ defmodule ChessmatchWeb.GameLive do
       if socket.assigns.role == :white do
         parse_fen(fen)
         |> Enum.with_index()
-        |> Enum.map(fn {piece, i} -> {piece, 63 - i} end)
+        |> Enum.map(fn {piece, i} -> {piece, div(63 - i, 8) * 8 + (7 - rem(63 - i, 8))} end)
       else
         parse_fen(fen)
         |> Enum.with_index()
-        |> Enum.map(fn {piece, i} -> {piece, 63 - i} end)
+        |> Enum.map(fn {piece, i} -> {piece, div(63 - i, 8) * 8 + (7 - rem(63 - i, 8))} end)
         |> Enum.reverse()
       end
 
@@ -199,14 +199,14 @@ defmodule ChessmatchWeb.GameLive do
 
     letter =
       case x do
-        0 -> "h"
-        1 -> "g"
-        2 -> "f"
-        3 -> "e"
-        4 -> "d"
-        5 -> "c"
-        6 -> "b"
-        7 -> "a"
+        0 -> "a"
+        1 -> "b"
+        2 -> "c"
+        3 -> "d"
+        4 -> "e"
+        5 -> "f"
+        6 -> "g"
+        7 -> "h"
       end
 
     number =
