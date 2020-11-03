@@ -1,5 +1,4 @@
-1. Update GameLive to support moving pieces
-    * Implement move_piece()
+1. Fix moving pieces being mirrored
 2. Spectator link
 3. Handle non-existant routes, games, parsing errors, clicking find game twice, etc
 4. Improve frontend design

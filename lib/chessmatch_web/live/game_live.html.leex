@@ -14,6 +14,7 @@
         <%= if color == :black do %> text-black <% else %> text-white <% end %>
         <%= if selectable?(i, @selection, @possible_moves) do %> border-4 border-purple-600 <% end %>
         ">
+
           <%= case piece do %>
             <% :pawn -> %> <span class="fas fa-chess-pawn"></span>
             <% :rook -> %> <span class="fas fa-chess-rook"></span>

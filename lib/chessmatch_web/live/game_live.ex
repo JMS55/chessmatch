@@ -23,20 +23,20 @@ defmodule ChessmatchWeb.GameLive do
   def handle_event("make_selection", %{"selection" => selection}, socket) do
     {selection, _} = Integer.parse(selection)
 
-    selection =
-      case socket.assigns.selection do
-        {nil, nil} ->
-          {selection, nil}
+    case socket.assigns.selection do
+      {nil, nil} ->
+        {:noreply, assign(socket, :selection, {selection, nil})}
 
-        {from, nil} when from == selection ->
-          {nil, nil}
+      {from, nil} when from == selection ->
+        {:noreply, assign(socket, :selection, {nil, nil})}
 
-        {from, nil} ->
-          move_piece({from, selection}, socket.assigns.game_instance)
-          {nil, nil}
-      end
+      {from, nil} ->
+        move = convert_piece(from) <> convert_piece(selection)
+        :binbo.move(socket.assigns.game_instance, move)
 
-    {:noreply, assign(socket, :selection, selection)}
+        socket = socket |> update_state() |> assign(:selection, {nil, nil})
+        {:noreply, socket}
+    end
   end
 
   @impl true
@@ -56,10 +56,15 @@ defmodule ChessmatchWeb.GameLive do
     game_message = parse_game_status(game_status, side_to_move)
 
     piece_list =
-      if socket.assigns.role == :black do
-        parse_fen(fen) |> Enum.with_index() |> Enum.reverse()
+      if socket.assigns.role == :white do
+        parse_fen(fen)
+        |> Enum.with_index()
+        |> Enum.map(fn {piece, i} -> {piece, 63 - i} end)
       else
-        parse_fen(fen) |> Enum.with_index()
+        parse_fen(fen)
+        |> Enum.with_index()
+        |> Enum.map(fn {piece, i} -> {piece, 63 - i} end)
+        |> Enum.reverse()
       end
 
     possible_moves =
@@ -180,15 +185,43 @@ defmodule ChessmatchWeb.GameLive do
     Enum.reduce(legal_moves, %{}, fn move, acc ->
       case move do
         {from, to} ->
-          Map.update(acc, 63 - from, MapSet.new(), fn set -> MapSet.put(set, 63 - to) end)
+          Map.update(acc, from, MapSet.new([to]), fn set -> MapSet.put(set, to) end)
 
         {from, to, _} ->
-          Map.update(acc, 63 - from, MapSet.new(), fn set -> MapSet.put(set, 63 - to) end)
+          Map.update(acc, from, MapSet.new([to]), fn set -> MapSet.put(set, to) end)
       end
     end)
   end
 
-  defp move_piece({from, to}, game_instance) do
+  defp convert_piece(i) do
+    x = rem(i, 8)
+    y = div(i, 8)
+
+    letter =
+      case x do
+        0 -> "h"
+        1 -> "g"
+        2 -> "f"
+        3 -> "e"
+        4 -> "d"
+        5 -> "c"
+        6 -> "b"
+        7 -> "a"
+      end
+
+    number =
+      case y do
+        0 -> "1"
+        1 -> "2"
+        2 -> "3"
+        3 -> "4"
+        4 -> "5"
+        5 -> "6"
+        6 -> "7"
+        7 -> "8"
+      end
+
+    letter <> number
   end
 
   defp selectable?(i, selection, possible_moves) do
