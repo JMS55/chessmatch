@@ -2,7 +2,6 @@
 2. Improve frontend design
     * Button press and focus styling
     * Board vs piece contrast
-    * Animation while finding game
     * Favicon
     * Sound/Music
     * Board size to fit browser

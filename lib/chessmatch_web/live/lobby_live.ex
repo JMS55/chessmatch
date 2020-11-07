@@ -1,19 +1,21 @@
 defmodule ChessmatchWeb.LobbyLive do
   use ChessmatchWeb, :live_view
 
-  def redirect_to_game(pid, game_id) do
-    Process.send(pid, {:redirect_to_game, game_id}, [])
-  end
-
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, socket}
+    {:ok, assign(socket, :finding_game, false)}
   end
 
   @impl true
   def handle_event("find_game", _unsigned_params, socket) do
-    Chessmatch.GameInstanceManager.queue_up()
-    {:noreply, socket}
+    if !socket.assigns.finding_game do
+      Chessmatch.GameInstanceManager.queue_up()
+      {:noreply, assign(socket, :finding_game, true)}
+    end
+  end
+
+  def redirect_to_game(pid, game_id) do
+    Process.send(pid, {:redirect_to_game, game_id}, [])
   end
 
   @impl true

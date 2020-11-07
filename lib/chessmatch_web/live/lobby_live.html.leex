@@ -1,4 +1,6 @@
 <div class="w-screen h-screen bg-gradient-to-r from-teal-400 to-blue-500 flex flex-col items-center justify-center space-y-10">
     <p class="text-6xl">Chessmatch <span class="fas fa-chess-rook"></span></p>
-    <button phx-click="find_game" class="w-1/3 text-5xl rounded-md p-5 bg-white">Find Game</button>
+    <button phx-click="find_game" class="w-1/3 text-5xl rounded-md p-5 bg-white">
+    <%= if @finding_game do %> <span class="animate-spin fas fa-spinner"></span> <% else %> <span class="fas fa-search"> <% end %> Find Game
+    </button>
 </div>
