@@ -29,9 +29,17 @@
     <% end %>
   </div>
 
-  <button
-    onclick="navigator.clipboard.writeText('<%= @spectator_link %>')"
-    class="rounded-md p-3 bg-white mt-8">
-    <span class="fas fa-link"></span> Copy Spectator Link
-  </button>
+  <div>
+    <button
+      onclick="navigator.clipboard.writeText('<%= @spectator_link %>')"
+      class="rounded-md p-3 font-semibold bg-white mt-8 mr-4">
+      <span class="fas fa-link"></span> Copy Spectator Link
+    </button>
+
+    <button
+      phx-click="forfeit_match"
+      class="rounded-md p-3 font-semibold text-white bg-red-600">
+      <span class="fas fa-flag"></span> Forfeit Match
+    </button>
+  </div>
 </div>

@@ -40,7 +40,9 @@ defmodule ChessmatchWeb.GameLive do
     piece_list = Chessmatch.BinboHelper.get_piece_list(socket.assigns.role, game_instance)
 
     possible_moves =
-      if socket.assigns.role == side_to_move do
+      if socket.assigns.role == side_to_move &&
+           game_message != "White Wins! - Black Forfeit" &&
+           game_message != "Black Wins! - White Forfeit" do
         Chessmatch.BinboHelper.get_possible_moves(game_instance)
       else
         %{}
@@ -71,6 +73,20 @@ defmodule ChessmatchWeb.GameLive do
     end
   end
 
+  @impl true
+  def handle_event("forfeit_match", _, socket) do
+    :binbo.game_draw(
+      socket.assigns.game_instance,
+      if socket.assigns.role == :black do
+        "White Wins! - Black Forfeit"
+      else
+        "Black Wins! - White Forfeit"
+      end
+    )
+
+    {:noreply, update_state(socket)}
+  end
+
   defp parse_game_status(game_status, side_to_move) do
     case game_status do
       :continue ->
@@ -82,9 +98,9 @@ defmodule ChessmatchWeb.GameLive do
 
       :checkmate ->
         if side_to_move == :black do
-          "Checkmate - White Wins!"
+          "White Wins! - Checkmate"
         else
-          "Checkmate - Black Wins!"
+          "Black Wins! - Checkmate"
         end
 
       {:draw, :stalemate} ->
@@ -99,8 +115,12 @@ defmodule ChessmatchWeb.GameLive do
       {:draw, :threefold_repetition} ->
         "Draw - Threefold Repetition"
 
-      {:draw, {:manual, _}} ->
-        "Draw - Manual"
+      {:draw, {:manual, reason}} ->
+        if reason == "White Wins! - Black Forfeit" || "Black Wins! - White Forfeit" do
+          reason
+        else
+          "Draw - #{reason}"
+        end
     end
   end
 
