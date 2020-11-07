@@ -11,6 +11,8 @@ defmodule ChessmatchWeb.LobbyLive do
     if !socket.assigns.finding_game do
       Chessmatch.GameInstanceManager.queue_up()
       {:noreply, assign(socket, :finding_game, true)}
+    else
+      {:noreply, socket}
     end
   end
 
