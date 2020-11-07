@@ -5,12 +5,16 @@ defmodule ChessmatchWeb.GameLive do
   def mount(%{"game_id" => game_id}, _session, socket) do
     {game_id, _} = Integer.parse(game_id)
 
-    {:ok, {role, game_instance}} = Chessmatch.GameInstanceManager.get_game_info(game_id)
+    {:ok, {role, game_instance, spectator_id}} =
+      Chessmatch.GameInstanceManager.get_game_info(game_id)
+
+    spectator_link = Routes.live_url(ChessmatchWeb.Endpoint, ChessmatchWeb.GameLive, spectator_id)
 
     socket =
       socket
       |> assign(:role, role)
       |> assign(:game_instance, game_instance)
+      |> assign(:spectator_link, spectator_link)
       |> assign(:selection, {nil, nil})
       |> update_state()
 
@@ -77,7 +81,11 @@ defmodule ChessmatchWeb.GameLive do
         end
 
       :checkmate ->
-        "Checkmate"
+        if side_to_move == :black do
+          "Checkmate - White Wins!"
+        else
+          "Checkmate - Black Wins!"
+        end
 
       {:draw, :stalemate} ->
         "Draw - Stalemate"

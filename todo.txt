@@ -1,12 +1,25 @@
-1. Spectator link
-2. Handle non-existant routes, games, parsing errors, clicking find game twice, etc
-3. Improve frontend design
+1. Handle non-existant routes, games, parsing errors, clicking find game twice, etc
+2. Improve frontend design
     * Button press and focus styling
     * Board vs piece contrast
     * Animation while finding game
     * Favicon
     * Sound/Music
+    * Board size to fit browser
+3. Surrender button
 4. Create game instances with timeouts
-5. Mobile support
-6. Update README and Github about section
-7. Add building release instructions
+5. UX
+    * Click another piece to switch to that
+    * Click other places to deselect
+6. Mobile and other screen size support
+7. Update README and Github about section
+8. Add building release instructions
+
+
+change tile colors to brown/dark brown or make it easier to see white pieces on the lighter tiles
+instead of adding a purple border to possible tiles, maybe add a small dot in the center of the tile if you can move there (chess.com/lichess do it like this, its kinda nice but you could do it differently if u want)
+make purple outline slightly bolder/darker (might remove need for previous bullet)
+pre-moves (you can select a move when its not your turn, and if that move is still legal once the opponent goes, it automatically makes that move for you)
+clocks/timers
+scores (+- numbers) (if youre up a pawn, it shows +1, if youre up a knight it shows +3, etc)
+could highlight opponents last move

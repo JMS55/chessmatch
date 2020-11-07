@@ -1,6 +1,7 @@
 <div class="w-screen h-screen bg-gradient-to-r from-teal-400 to-blue-500 flex flex-col items-center">
-  <p class="h-1/5 font-sans font-bold text-5xl text-center my-5"> <%= @game_message %> </p>
-  <div class="max-w-3xl grid grid-cols-8 gap-3">
+  <p class="h-1/5 font-bold text-5xl text-center my-3"> <%= @game_message %> </p>
+
+  <div class="max-w-3xl grid grid-cols-8 gap-2">
     <%= for {{piece, color, i}, i2} <- Enum.with_index(@piece_list) do %>
       <button
         <%= if selectable?(i, @selection, @possible_moves) do %>
@@ -27,4 +28,10 @@
       </button>
     <% end %>
   </div>
+
+  <button
+    onclick="navigator.clipboard.writeText('<%= @spectator_link %>')"
+    class="rounded-md p-3 bg-white mt-8">
+    <span class="fas fa-link"></span> Copy Spectator Link
+  </button>
 </div>

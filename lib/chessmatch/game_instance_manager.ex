@@ -33,9 +33,9 @@ defmodule Chessmatch.GameInstanceManager do
 
         games =
           games
-          |> Map.put(black_id, {:black, game_instance})
-          |> Map.put(white_id, {:white, game_instance})
-          |> Map.put(spectator_id, {:spectator, game_instance})
+          |> Map.put(black_id, {:black, game_instance, spectator_id})
+          |> Map.put(white_id, {:white, game_instance, spectator_id})
+          |> Map.put(spectator_id, {:spectator, game_instance, spectator_id})
 
         ChessmatchWeb.LobbyLive.redirect_to_game(p1, black_id)
         ChessmatchWeb.LobbyLive.redirect_to_game(p2, white_id)
