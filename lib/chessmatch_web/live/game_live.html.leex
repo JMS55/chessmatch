@@ -1,7 +1,7 @@
 <div class="w-screen h-screen bg-gradient-to-r from-teal-400 to-blue-500 flex flex-col items-center">
-  <p class="h-1/5 font-bold text-5xl text-center my-3"> <%= @game_message %> </p>
+  <p class="font-bold text-3xl md:text-5xl text-center my-4"> <%= @game_message %> </p>
 
-  <div class="max-w-3xl grid grid-cols-8 gap-2">
+  <div class="grid grid-cols-8 gap-1 md:gap-2">
     <%= for {{piece, color, i}, i2} <- Enum.with_index(@piece_list) do %>
       <button
         <%= if selectable?(i, @selection, @possible_moves) do %>
@@ -10,10 +10,10 @@
           disabled
         <% end %>
 
-        class="w-20 h-20 <%= if rem(i2, 2) == rem(div(i2, 8), 2) do %> bg-gray-300 <% else %> bg-gray-700 <% end %>
-        rounded shadow-xl text-4xl
+        class="w-10 h-10 md:w-20 md:h-20 <%= if rem(i2, 2) == rem(div(i2, 8), 2) do %> bg-gray-300 <% else %> bg-gray-700 <% end %>
+        text-xl md:text-4xl rounded shadow-xl
         <%= if color == :black do %> text-black <% else %> text-white <% end %>
-        <%= if selectable?(i, @selection, @possible_moves) do %> border-4 border-purple-600 <% end %>
+        <%= if selectable?(i, @selection, @possible_moves) do %> border-2 md:border-4 border-purple-600 <% end %>
         ">
 
           <%= case piece do %>
@@ -29,17 +29,17 @@
     <% end %>
   </div>
 
-  <div class="flex flex-row mt-8 space-x-4">
+  <div class="flex flex-row mt-6 md:mt-8 space-x-4">
     <button
       onclick="navigator.clipboard.writeText('<%= @spectator_link %>')"
-      class="rounded-md p-3 font-semibold bg-white">
+      class="rounded-md p-2 md:p-3 text-xs md:text-base font-semibold bg-white">
       <span class="fas fa-link"></span> Copy Spectator Link
     </button>
 
     <%= if @role != :spectator do %>
       <button
         phx-click="forfeit_match"
-        class="rounded-md p-3 font-semibold text-white bg-red-600">
+        class="rounded-md p-2 md:p-3 text-xs md:text-base font-semibold text-white bg-red-600">
         <span class="fas fa-flag"></span> Forfeit Match
       </button>
     <% end %>

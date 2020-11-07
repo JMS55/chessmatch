@@ -8,10 +8,9 @@
 3. UX
     * Click another piece to switch to that
     * Click other places to deselect
-4. Mobile and other screen size support
-5. Create game instances with timeouts
-6. Update README and Github about section
-7. Add building release instructions
+4. Create game instances with timeouts
+5. Update README and Github about section
+6. Add building release instructions
 
 
 change tile colors to brown/dark brown or make it easier to see white pieces on the lighter tiles
