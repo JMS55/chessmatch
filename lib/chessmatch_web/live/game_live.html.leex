@@ -36,10 +36,12 @@
       <span class="fas fa-link"></span> Copy Spectator Link
     </button>
 
-    <button
-      phx-click="forfeit_match"
-      class="rounded-md p-3 font-semibold text-white bg-red-600">
-      <span class="fas fa-flag"></span> Forfeit Match
-    </button>
+    <%= if @role != :spectator do %>
+      <button
+        phx-click="forfeit_match"
+        class="rounded-md p-3 font-semibold text-white bg-red-600">
+        <span class="fas fa-flag"></span> Forfeit Match
+      </button>
+    <% end %>
   </div>
 </div>
