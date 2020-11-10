@@ -43,7 +43,7 @@ defmodule Chessmatch.MixProject do
       {:telemetry_poller, "~> 0.4"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:binbo, "~> 2.0"}
+      {:binbo, git: "git://github.com/DOBRO/binbo.git"}
     ]
   end
 

@@ -36,8 +36,8 @@ defmodule ChessmatchWeb.GameLive do
     {:ok, game_status} = :binbo.game_status(game_instance)
     {:ok, side_to_move} = :binbo.side_to_move(game_instance)
 
-    game_message = parse_game_status(game_status, side_to_move)
-    piece_list = Chessmatch.BinboHelper.get_piece_list(socket.assigns.role, game_instance)
+    game_message = Chessmatch.BinboHelper.parse_game_status(game_status, side_to_move)
+    board = Chessmatch.BinboHelper.get_board(socket.assigns.role, game_instance)
 
     possible_moves =
       if socket.assigns.role == side_to_move &&
@@ -50,7 +50,7 @@ defmodule ChessmatchWeb.GameLive do
 
     socket
     |> assign(:game_message, game_message)
-    |> assign(:piece_list, piece_list)
+    |> assign(:board, board)
     |> assign(:possible_moves, possible_moves)
   end
 
@@ -66,7 +66,7 @@ defmodule ChessmatchWeb.GameLive do
         {:noreply, assign(socket, :selection, {nil, nil})}
 
       {from, nil} ->
-        Chessmatch.BinboHelper.move_with_indices(from, selection, socket.assigns.game_instance)
+        :binbo.index_move(socket.assigns.game_instance, from, selection)
 
         socket = socket |> update_state() |> assign(:selection, {nil, nil})
         {:noreply, socket}
@@ -85,43 +85,6 @@ defmodule ChessmatchWeb.GameLive do
     )
 
     {:noreply, update_state(socket)}
-  end
-
-  defp parse_game_status(game_status, side_to_move) do
-    case game_status do
-      :continue ->
-        if side_to_move == :black do
-          "Black's Turn"
-        else
-          "White's Turn"
-        end
-
-      :checkmate ->
-        if side_to_move == :black do
-          "White Wins! - Checkmate"
-        else
-          "Black Wins! - Checkmate"
-        end
-
-      {:draw, :stalemate} ->
-        "Draw - Stalemate"
-
-      {:draw, :rule50} ->
-        "Draw - Fifty Move Rule"
-
-      {:draw, :insufficient_material} ->
-        "Draw - Insufficient Material"
-
-      {:draw, :threefold_repetition} ->
-        "Draw - Threefold Repetition"
-
-      {:draw, {:manual, reason}} ->
-        if reason == "White Wins! - Black Forfeit" || "Black Wins! - White Forfeit" do
-          reason
-        else
-          "Draw - #{reason}"
-        end
-    end
   end
 
   defp selectable?(i, selection, possible_moves) do
