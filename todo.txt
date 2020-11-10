@@ -1,18 +1,19 @@
 1. Handle non-existant routes, games, parsing errors, clicking find game twice, etc
 2. Confirmation for forfeit
-3. Improve frontend design
+3. Handle leavers - In game or in queue
+4. Improve frontend design
     * Button press and focus styling
     * Board vs piece contrast
     * Favicon
     * Sound/Music
     * Board size to fit browser
-4. UX
+5. UX
     * Click another piece to switch to that
     * Click other places to deselect
-5. Create game instances with timeouts
-6. Update README and Github about section
-7. Make sure to use released binbo version, and not git
-8. Deploy to gigalixir
+6. Create game instances with timeouts
+7. Update README and Github about section
+8. Make sure to use released binbo version, and not git
+9. Deploy to gigalixir
 
 
 change tile colors to brown/dark brown or make it easier to see white pieces on the lighter tiles

@@ -40,8 +40,8 @@ defmodule ChessmatchWeb.GameLive do
     board = Chessmatch.BinboHelper.get_board(socket.assigns.role, game_instance)
 
     possible_moves =
-      if socket.assigns.role == side_to_move &&
-           game_message != "White Wins! - Black Forfeit" &&
+      if socket.assigns.role == side_to_move and
+           game_message != "White Wins! - Black Forfeit" and
            game_message != "Black Wins! - White Forfeit" do
         Chessmatch.BinboHelper.get_possible_moves(game_instance)
       else

@@ -55,7 +55,7 @@ defmodule Chessmatch.BinboHelper do
         "Draw - Threefold Repetition"
 
       {:draw, {:manual, reason}} ->
-        if reason == "White Wins! - Black Forfeit" || "Black Wins! - White Forfeit" do
+        if reason == "White Wins! - Black Forfeit" or reason == "Black Wins! - White Forfeit" do
           reason
         else
           "Draw - #{reason}"
@@ -64,18 +64,22 @@ defmodule Chessmatch.BinboHelper do
   end
 
   defp fill_in_pieces_list(pieces_list, expected_i \\ 63, result \\ []) do
-    case pieces_list do
-      [] ->
-        result
-
-      [piece | tail] ->
-        {i, _, _} = piece
-
-        if i == expected_i do
-          fill_in_pieces_list(tail, expected_i - 1, result ++ [piece])
-        else
+    if expected_i < 0 do
+      result
+    else
+      case pieces_list do
+        [] ->
           fill_in_pieces_list(pieces_list, expected_i - 1, result ++ [{expected_i, nil, nil}])
-        end
+
+        [piece | tail] ->
+          {i, _, _} = piece
+
+          if i == expected_i do
+            fill_in_pieces_list(tail, expected_i - 1, result ++ [piece])
+          else
+            fill_in_pieces_list(pieces_list, expected_i - 1, result ++ [{expected_i, nil, nil}])
+          end
+      end
     end
   end
 end

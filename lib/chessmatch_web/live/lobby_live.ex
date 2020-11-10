@@ -8,7 +8,7 @@ defmodule ChessmatchWeb.LobbyLive do
 
   @impl true
   def handle_event("find_game", _unsigned_params, socket) do
-    if !socket.assigns.finding_game do
+    if not socket.assigns.finding_game do
       Chessmatch.GameInstanceManager.queue_up()
       {:noreply, assign(socket, :finding_game, true)}
     else
