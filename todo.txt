@@ -1,15 +1,15 @@
-1. Confirmation for forfeit
-2. Improve frontend design
+1. Improve frontend design
     * Button press and focus styling
     * Board vs piece contrast
     * Favicon
     * Sound/Music
     * Board size to fit browser
-3. UX
+    * Animations
+2. UX
     * Click another piece to switch to that
     * Click other places to deselect
-4. Update README and Github about section
-5. Deploy to gigalixir
+3. Update README and Github about section
+4. Deploy to gigalixir
 
 1. Make sure to use released binbo version, and not git
 2. Handle leavers - In game or in queue

@@ -1,5 +1,11 @@
 <div class="w-screen h-screen bg-gradient-to-r from-teal-400 to-blue-500 flex flex-col items-center">
-  <p class="font-bold text-3xl md:text-5xl text-center my-4"> <%= @game_message %> </p>
+  <div class="mt-10 md:mt-20 w-9/12 md:w-2/5 fixed p-10 md:p-20 rounded-md shadow-2xl bg-gray-200 text-2xl md:text-4xl <%= if not @forfeit_dialog_open do %> hidden <% end %>">
+    <p class="mb-4">Are you sure you want to forfeit?</p>
+    <button phx-click="toggle_forfeit_dialog" class="mr-3 px-3 md:px-5 py-1 rounded-lg text-2xl md:text-3xl text-white bg-green-600">No</button>
+    <button phx-click="forfeit_match" class="px-3 md:px-5 py-1 rounded-lg text-2xl md:text-3xl text-white bg-red-600">Yes</button>
+  </div>
+
+  <p class="font-bold text-2xl md:text-5xl text-center my-4"> <%= @game_message %> </p>
 
   <div class="grid grid-cols-8 gap-1 md:gap-2">
     <%= for {{i, color, piece}, i2} <- Enum.with_index(@board) do %>
@@ -38,7 +44,7 @@
 
     <%= if @role != :spectator do %>
       <button
-        phx-click="forfeit_match"
+        phx-click="toggle_forfeit_dialog"
         class="rounded-full px-4 py-2 md:px-5 md:py-3 text-xs md:text-base font-semibold text-white bg-red-600">
         <span class="fas fa-flag"></span> Forfeit Match
       </button>

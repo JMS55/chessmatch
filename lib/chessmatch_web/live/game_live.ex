@@ -15,6 +15,7 @@ defmodule ChessmatchWeb.GameLive do
         |> assign(:game_instance, game_instance)
         |> assign(:spectator_link, spectator_link)
         |> assign(:selection, {nil, nil})
+        |> assign(:forfeit_dialog_open, false)
         |> update_state()
 
       Process.send_after(self(), :update_state, 1000)
@@ -76,7 +77,15 @@ defmodule ChessmatchWeb.GameLive do
   end
 
   @impl true
+  def handle_event("toggle_forfeit_dialog", _, socket) do
+    socket = assign(socket, :forfeit_dialog_open, not socket.assigns.forfeit_dialog_open)
+    {:noreply, socket}
+  end
+
+  @impl true
   def handle_event("forfeit_match", _, socket) do
+    socket = assign(socket, :forfeit_dialog_open, not socket.assigns.forfeit_dialog_open)
+
     :binbo.game_draw(
       socket.assigns.game_instance,
       if socket.assigns.role == :black do
