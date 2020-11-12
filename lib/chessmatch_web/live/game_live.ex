@@ -3,24 +3,26 @@ defmodule ChessmatchWeb.GameLive do
 
   @impl true
   def mount(%{"game_id" => game_id}, _session, socket) do
-    {game_id, _} = Integer.parse(game_id)
+    with {game_id, ""} <- Integer.parse(game_id),
+         {:ok, {role, game_instance, spectator_id}} <-
+           Chessmatch.GameInstanceManager.get_game_info(game_id) do
+      spectator_link =
+        Routes.live_url(ChessmatchWeb.Endpoint, ChessmatchWeb.GameLive, spectator_id)
 
-    {:ok, {role, game_instance, spectator_id}} =
-      Chessmatch.GameInstanceManager.get_game_info(game_id)
+      socket =
+        socket
+        |> assign(:role, role)
+        |> assign(:game_instance, game_instance)
+        |> assign(:spectator_link, spectator_link)
+        |> assign(:selection, {nil, nil})
+        |> update_state()
 
-    spectator_link = Routes.live_url(ChessmatchWeb.Endpoint, ChessmatchWeb.GameLive, spectator_id)
+      Process.send_after(self(), :update_state, 1000)
 
-    socket =
-      socket
-      |> assign(:role, role)
-      |> assign(:game_instance, game_instance)
-      |> assign(:spectator_link, spectator_link)
-      |> assign(:selection, {nil, nil})
-      |> update_state()
-
-    Process.send_after(self(), :update_state, 1000)
-
-    {:ok, socket}
+      {:ok, socket}
+    else
+      _ -> Phoenix.Router.MalformedURIError
+    end
   end
 
   @impl true
