@@ -1,10 +1,11 @@
 1. Improve frontend design
-    * Button press and focus styling
-    * Board vs piece contrast
-    * Favicon
-    * Sound/Music
-    * Board size to fit browser
+    * Forfeit dialog
     * Animations
+        * Button hover/click
+        * Piece moving
+    * Favicon
+        * Change color/design when it's your turn
+    * Sound/Music
 2. UX
     * Click another piece to switch to that
     * Click other places to deselect
@@ -14,11 +15,5 @@
 1. Make sure to use released binbo version, and not git
 2. Handle leavers - In game or in queue
 3. Create game instances with timeouts
-
-change tile colors to brown/dark brown or make it easier to see white pieces on the lighter tiles
-instead of adding a purple border to possible tiles, maybe add a small dot in the center of the tile if you can move there (chess.com/lichess do it like this, its kinda nice but you could do it differently if u want)
-make purple outline slightly bolder/darker (might remove need for previous bullet)
-pre-moves (you can select a move when its not your turn, and if that move is still legal once the opponent goes, it automatically makes that move for you)
-clocks/timers
-scores (+- numbers) (if youre up a pawn, it shows +1, if youre up a knight it shows +3, etc)
-could highlight opponents last move
+4. Scores (Capturing a pawn is +1, etc)
+5. Turn timer

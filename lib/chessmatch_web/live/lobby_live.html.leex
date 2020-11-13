@@ -1,6 +1,6 @@
-<div class="w-screen h-screen bg-gradient-to-r from-teal-400 to-blue-500 flex flex-col items-center justify-center space-y-8">
-  <p class="text-4xl md:text-6xl">Chessmatch <span class="fas fa-chess-rook"></span></p>
-  <button phx-click="find_game" class="text-4xl md:text-5xl md:w-1/3 rounded-md p-5 bg-white">
-      <%= if @finding_game do %> <span class="animate-spin fas fa-spinner"></span> <% else %> <span class="fas fa-search"> <% end %> Find Game
+<div class="w-screen h-screen appbg flex flex-col items-center justify-center space-y-4 md:space-y-8">
+  <p class="font-bold text-5xl md:text-9xl bg-gradient-to-br from-gray-400 to-gray-600 bg-clip-text text-transparent">Chessmatch <span class="fas fa-chess-rook"></span></p>
+  <button phx-click="find_game" class="text-1xl md:text-4xl md:w-1/4 rounded-lg py-3 md:py-5 px-5 border-4 border-gray-400 border-opacity-75 text-gray-400 tracking-wider font-medium">
+      <%= if @finding_game do %> <span class="animate-spin fas fa-spinner"></span> Finding Game <% else %> <span class="fas fa-search"> <span class="font-normal font-sans">Find Game</span> <% end %>
   </button>
 </div>
