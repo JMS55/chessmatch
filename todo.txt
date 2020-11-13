@@ -10,10 +10,10 @@
     * Click another piece to switch to that
     * Click other places to deselect
 3. Update README and Github about section
-4. Deploy to gigalixir
+4. Create game instances with timeouts
+5. Deploy online
 
 1. Make sure to use released binbo version, and not git
 2. Handle leavers - In game or in queue
-3. Create game instances with timeouts
 4. Scores (Capturing a pawn is +1, etc)
 5. Turn timer

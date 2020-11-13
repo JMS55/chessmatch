@@ -6,8 +6,7 @@ defmodule ChessmatchWeb.GameLive do
     with {game_id, ""} <- Integer.parse(game_id),
          {:ok, {role, game_instance, spectator_id}} <-
            Chessmatch.GameInstanceManager.get_game_info(game_id) do
-      spectator_link =
-        Routes.live_url(ChessmatchWeb.Endpoint, ChessmatchWeb.GameLive, spectator_id)
+      spectator_link = Routes.live_url(socket, ChessmatchWeb.GameLive, spectator_id)
 
       socket =
         socket
