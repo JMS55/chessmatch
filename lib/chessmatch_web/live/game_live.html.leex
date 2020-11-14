@@ -8,9 +8,9 @@
   <p class="font-bold text-2plusxl md:text-5plusxl text-center my-4 bg-gradient-to-br from-gray-400 to-gray-600 bg-clip-text text-transparent"> <%= @game_message %> </p>
 
   <div class="grid grid-cols-8 gap-1 md:gap-2">
-    <%= for {{i, color, piece}, i2} <- Enum.with_index(@board) do %>
+    <%= for {i, color, piece} <- @board do %>
       <button
-        class="w-10 h-10 md:w-20 md:h-20 <%= if rem(i2, 2) == rem(div(i2, 8), 2) do %> bg-gradient-to-tl from-gray-500 to-gray-600 <% else %> bg-gradient-to-tl from-teal-600 to-teal-700 <% end %>
+        class="w-10 h-10 md:w-20 md:h-20 <%= if rem(i, 2) != rem(div(i, 8), 2) do %> bg-gradient-to-tl from-gray-500 to-gray-600 <% else %> bg-gradient-to-tl from-teal-600 to-teal-700 <% end %>
         text-xl md:text-4xl rounded shadow-xl <%= if selectable?(i, @selection, @possible_moves) do %> border-2 md:border-4 border-gray-200 border-opacity-50 <% end %>"
         <%= if selectable?(i, @selection, @possible_moves) do %>
           phx-click="select_piece" phx-value-selection=<%= i %>

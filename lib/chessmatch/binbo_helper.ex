@@ -5,9 +5,11 @@ defmodule Chessmatch.BinboHelper do
     if role == :white do
       pieces_list
       |> fill_in_pieces_list
+      |> Enum.sort_by(fn {i, _, _} -> div(63 - i, 8) * 8 + (7 - rem(63 - i, 8)) end)
     else
       pieces_list
       |> fill_in_pieces_list
+      |> Enum.sort_by(fn {i, _, _} -> div(63 - i, 8) * 8 + (7 - rem(63 - i, 8)) end)
       |> Enum.reverse()
     end
   end
