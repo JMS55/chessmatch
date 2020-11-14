@@ -11,7 +11,13 @@ module.exports = {
     "./js/**/*.js"
   ],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        "mdwh": [
+          { "raw": "(min-width: 767px) and (min-height: 915px)" },
+        ]
+      }
+    }
   },
   variants: {},
   plugins: [],
