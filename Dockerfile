@@ -13,6 +13,8 @@ RUN mix local.hex --force && \
 # set build ENV
 ENV MIX_ENV=prod
 
+COPY lib lib
+
 # install mix dependencies
 COPY mix.exs mix.lock ./
 RUN mix deps.get --only $MIX_ENV
@@ -29,15 +31,6 @@ RUN npm --prefix ./assets ci --progress=false --no-audit --loglevel=error
 
 COPY priv priv
 
-# compile and build the release
-COPY lib lib
-RUN mix compile
-# changes to config/runtime.exs don't require recompiling the code
-COPY config/runtime.exs config/
-# uncomment COPY if rel/ exists
-# COPY rel rel
-RUN mix release
-
 # Note: if your project uses a tool like https://purgecss.com/,
 # which customizes asset compilation based on what it finds in
 # your Elixir templates, you will need to move the asset compilation step
@@ -46,6 +39,14 @@ COPY assets assets
 # use webpack to compile npm dependencies - https://www.npmjs.com/package/webpack-deploy
 RUN npm run --prefix ./assets deploy
 RUN mix phx.digest
+
+# compile and build the release
+RUN mix compile
+# changes to config/runtime.exs don't require recompiling the code
+COPY config/runtime.exs config/
+# uncomment COPY if rel/ exists
+# COPY rel rel
+RUN mix release
 
 # Start a new build stage so that the final image will only contain
 # the compiled release and other runtime necessities
