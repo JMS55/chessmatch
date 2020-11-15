@@ -1,11 +1,11 @@
 1. Improve frontend design
+    * Add in third breakpoint between sm and mdwh
     * Forfeit dialog
     * Animations
         * Button hover/click
         * Piece moving
     * Favicon
         * Change color/design when it's your turn
-    * Sound/Music
 2. UX
     * Click another piece to switch to that
     * Click other places to deselect
@@ -17,3 +17,4 @@
 2. Handle leavers - In game or in queue
 4. Scores (Capturing a pawn is +1, etc)
 5. Turn timer
+6. Sound/Music
