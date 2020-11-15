@@ -9,7 +9,6 @@
     * Click another piece to switch to that
     * Click other places to deselect
 3. Update README and Github about section
-4. Deploy online
 
 1. Make sure to use released binbo version, and not git
 2. Handle leavers - In game or in queue
