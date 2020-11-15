@@ -1,0 +1,11 @@
+[Unit]
+Description=Play chess with others
+After=caddy.service
+
+[Service]
+Type=simple
+ExecStart=/root/chessmatch/_build/prod/rel/chessmatch/bin/chessmatch start
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
