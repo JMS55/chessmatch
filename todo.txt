@@ -1,13 +1,12 @@
-1. Why won't favicon get served in release?
-2. Update README and Github about section
-3. Improve frontend design
+1. Update README and Github about section
+2. Improve frontend design
     * Add in third breakpoint between sm and mdwh
     * Forfeit dialog
     * Animations
         * Button hover/click
         * Piece moving
     * Change favicon color/design when it's your turn
-4. UX
+3. UX
     * Click another piece to switch to that
     * Click other places to deselect
 

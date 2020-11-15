@@ -18,7 +18,7 @@ defmodule ChessmatchWeb.Router do
     pipe_through :browser
 
     live "/", LobbyLive
-    live "/:game_id", GameLive
+    live "/game/:game_id", GameLive
   end
 
   # Other scopes may use custom stacks.
