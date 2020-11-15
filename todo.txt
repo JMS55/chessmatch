@@ -4,17 +4,16 @@
     * Animations
         * Button hover/click
         * Piece moving
-    * Favicon
-        * Change color/design when it's your turn
+    * Change favicon color/design when it's your turn
 2. UX
     * Click another piece to switch to that
     * Click other places to deselect
 3. Update README and Github about section
-4. Create game instances with timeouts
-5. Deploy online
+4. Deploy online
 
 1. Make sure to use released binbo version, and not git
 2. Handle leavers - In game or in queue
 4. Scores (Capturing a pawn is +1, etc)
 5. Turn timer
-6. Sound/Music
+6. Optimize app size
+7. Sound/Music

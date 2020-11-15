@@ -24,7 +24,12 @@ defmodule Chessmatch.GameInstanceManager do
 
     case queue do
       [p1, p2 | queue] ->
-        {:ok, game_instance} = :binbo.new_server()
+        {:ok, game_instance} =
+          :binbo.new_server(%{
+            :idle_timeout => 300_000,
+            :onterminate => {fn _, _, _, _ -> nil end, nil}
+          })
+
         {:ok, _} = :binbo.new_game(game_instance)
 
         black_id = :rand.uniform(1_000_000)
