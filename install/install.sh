@@ -8,7 +8,7 @@ npm run deploy --prefix ./assets
 mix phx.digest
 mix release
 
-cd ./infra
+cd ./install
 
 cp chessmatch.service /etc/systemd/system/
 mkdir /etc/systemd/system/chessmatch.service.d/

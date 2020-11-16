@@ -9,6 +9,6 @@
 2. Setup a firewall to only allow `SSH/HTTP/HTTPS` inbound connections
 3. Install elixir 1.10+, erlang, and caddy
 4. `git clone https://github.com/JMS55/chessmatch && cd chessmatch`
-5. `Replace "chessmatch.cf" with your domain in /infra/Caddyfile and /config/prod.exs`
-6. `cd infra && bash install.sh`
+5. `Replace "chessmatch.cf" with your domain in /install/Caddyfile and /config/prod.exs`
+6. `cd install && bash install.sh`
 7. `reboot`
