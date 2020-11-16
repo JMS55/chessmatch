@@ -1,4 +1,4 @@
-1. Update README and Github about section
+1. Fix favicon not showing in production
 2. Improve frontend design
     * Add in third breakpoint between sm and mdwh
     * Forfeit dialog

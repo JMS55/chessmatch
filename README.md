@@ -1,19 +1,14 @@
-# Chessmatch
+# [Chessmatch](https://chessmatch.cf)
+### Play chess with others
+<img src="screenshot.png" alt="Screenshot" width="450"/>
 
-To start your Phoenix server:
+---
 
-  * Install dependencies with `mix deps.get`
-  * Install Node.js dependencies with `npm install` inside the `assets` directory
-  * Start Phoenix endpoint with `mix phx.server`
-
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
-
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
-
-## Learn more
-
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+### Deploy to a Server:
+1. Setup a DNS record to point to your server's public IP address
+2. Setup a firewall to only allow `SSH/HTTP/HTTPS` inbound connections
+3. Install elixir 1.10+, erlang, and caddy
+4. `git clone https://github.com/JMS55/chessmatch && cd chessmatch`
+5. `Replace "chessmatch.cf" with your domain in /infra/Caddyfile and /config/prod.exs`
+6. `cd infra && bash install.sh`
+7. `reboot`
