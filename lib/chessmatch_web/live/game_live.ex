@@ -5,7 +5,7 @@ defmodule ChessmatchWeb.GameLive do
   def mount(%{"game_id" => game_id}, _session, socket) do
     with {game_id, ""} <- Integer.parse(game_id),
          {:ok, {role, game_instance, spectator_id}} <-
-           Chessmatch.GameInstanceManager.get_game_info(game_id) do
+           Chessmatch.Matchmaker.get_game_info(game_id) do
       spectator_link = Routes.live_url(socket, ChessmatchWeb.GameLive, spectator_id)
 
       socket =

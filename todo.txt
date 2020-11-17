@@ -1,18 +1,19 @@
-1. Fix favicon not showing in production
-2. Improve frontend design
-    * Add in third breakpoint between sm and mdwh
+1. Improve frontend design
     * Forfeit dialog
     * Animations
         * Button hover/click
         * Piece moving
     * Change favicon color/design when it's your turn
-3. UX
+2. UX
     * Click another piece to switch to that
     * Click other places to deselect
+3. Make sure to use released binbo version, and not git
 
-1. Make sure to use released binbo version, and not git
-2. Handle leavers - In game or in queue
-4. Scores (Capturing a pawn is +1, etc)
-5. Turn timer
-6. Optimize app size
-7. Sound/Music
+
+1. Handle leavers - In game or in queue
+2. Optimize app size
+3. Scores (Capturing a pawn is +1, etc)
+
+
+1. Turn timer
+2. Sound/Music

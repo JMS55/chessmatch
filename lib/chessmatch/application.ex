@@ -7,7 +7,7 @@ defmodule Chessmatch.Application do
 
   def start(_type, _args) do
     children = [
-      {Chessmatch.GameInstanceManager, name: Chessmatch.GameInstanceManager},
+      {Chessmatch.Matchmaker, name: Chessmatch.Matchmaker},
       # Start the Telemetry supervisor
       ChessmatchWeb.Telemetry,
       # Start the PubSub system

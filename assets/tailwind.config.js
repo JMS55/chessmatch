@@ -13,7 +13,10 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        "mdwh": [
+        "bm": [
+          { "raw": "(min-width: 767px) and (min-height: 777px)" },
+        ],
+        "bl": [
           { "raw": "(min-width: 767px) and (min-height: 915px)" },
         ]
       }
