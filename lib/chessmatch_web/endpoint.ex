@@ -24,7 +24,7 @@ defmodule ChessmatchWeb.Endpoint do
     at: "/",
     from: :chessmatch,
     gzip: false,
-    only: ~w(css fonts images js favicon.svg robots.txt)
+    only_matching: ~w(css fonts images js favicon robots.txt)
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
