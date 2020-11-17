@@ -1,4 +1,4 @@
-defmodule Chessmatch.Matchmaker do
+defmodule Chessmatch.GameManager do
   use GenServer
 
   def start_link(opts) do
