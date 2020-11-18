@@ -1,16 +1,16 @@
 <div class="w-screen h-screen appbg flex flex-col items-center">
   <div class="mt-10 bm:mt-20 w-9/12 bm:w-2/5 fixed p-10 bm:p-20 rounded-md shadow-2xl bg-gray-400 text-2xl bm:text-4xl <%= if not @forfeit_dialog_open do %> hidden <% end %>">
     <p class="mb-4">Are you sure you want to forfeit?</p>
-    <button phx-click="toggle_forfeit_dialog" class="mr-3 px-3 bm:px-5 py-1 rounded-lg text-2xl bm:text-3xl text-white bg-gradient-to-r from-green-500 to-green-700">No</button>
-    <button phx-click="forfeit_match" class="px-3 bm:px-5 py-1 rounded-lg text-2xl bm:text-3xl text-white bg-gradient-to-r from-red-500 to-red-700">Yes</button>
+    <button phx-click="toggle_forfeit_dialog" class="mr-3 px-3 bm:px-5 py-2 rounded-lg text-2xl bm:text-3xl text-white bg-gradient-to-r from-green-500 to-green-700">No</button>
+    <button phx-click="forfeit_match" class="px-3 bm:px-5 py-2 rounded-lg text-2xl bm:text-3xl text-white bg-gradient-to-r from-red-500 to-red-700">Yes</button>
   </div>
 
-  <p class="font-bold text-2plusxl bm:text-4xl bl:text-5plusxl text-center my-4 bg-gradient-to-br from-gray-400 to-gray-600 bg-clip-text text-transparent"> <%= @game_message %> </p>
+  <p class="font-bold text-3xl bm:text-4xl bl:text-6xl text-center my-6 bg-gradient-to-br from-gray-300 to-gray-500 bg-clip-text text-transparent"> <%= @game_message %> </p>
 
   <div class="grid grid-cols-8 gap-1 bm:gap-2">
     <%= for {i, color, piece} <- @board do %>
       <button
-        class="w-10 h-10 bm:w-16 bm:h-16 bl:w-20 bl:h-20 <%= if rem(i, 2) != rem(div(i, 8), 2) do %> bg-gradient-to-tl from-gray-500 to-gray-600 <% else %> bg-gradient-to-tl from-teal-600 to-teal-700 <% end %>
+        class="w-10 h-10 bm:w-16 bm:h-16 bl:w-20 bl:h-20 <%= if rem(i, 2) != rem(div(i, 8), 2) do %> bg-gradient-to-tl from-gray-400 to-gray-500 <% else %> bg-gradient-to-tl from-teal-600 to-teal-700 <% end %>
         text-2xl bm:text-4xl bl:text-5xl rounded shadow-xl <%= border(i, @selection, @possible_moves) %>"
         <%= if selectable?(i, @selection, @possible_moves) > 0 do %>
           phx-click="select_piece" phx-value-selection=<%= i %>
@@ -34,14 +34,14 @@
   <div class="flex flex-row mt-6 bl:mt-8 space-x-4">
     <button
       onclick="navigator.clipboard.writeText('<%= @spectator_link %>')"
-      class="rounded-full px-4 py-2 bl:px-5 bl:py-3 text-xs bm:text-base font-semibold bg-gradient-to-r from-gray-300 to-gray-500">
+      class="rounded-full px-4 py-2 bl:px-5 bl:py-3 text-xs bm:text-base font-semibold bg-gradient-to-r from-gray-200 to-gray-400">
       <span class="fas fa-link"></span> Copy Spectator Link
     </button>
 
     <%= if @role != :spectator do %>
       <button
         phx-click="toggle_forfeit_dialog"
-        class="rounded-full px-4 py-2 bl:px-5 bl:py-3 text-xs bm:text-base font-semibold text-white bg-gradient-to-r from-red-500 to-red-700">
+        class="rounded-full px-4 py-2 bl:px-5 bl:py-3 text-xs bm:text-base font-semibold text-white bg-gradient-to-r from-red-400 to-red-600">
         <span class="fas fa-flag"></span> Forfeit Match
       </button>
     <% end %>

@@ -1,8 +1,7 @@
+const colors = require("tailwindcss/colors")
+
 module.exports = {
-  future: {
-    // removeDeprecatedGapUtilities: true,
-    // purgeLayersByDefault: true,
-  },
+  future: {},
   purge: [
     "../**/*.html.eex",
     "../**/*.html.leex",
@@ -12,6 +11,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        gray: colors.blueGray,
+        teal: colors.teal
+      },
       screens: {
         "bm": [
           { "raw": "(min-width: 767px) and (min-height: 777px)" },

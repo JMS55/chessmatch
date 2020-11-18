@@ -11,20 +11,6 @@ $fa-font-path: "../node_modules/@fortawesome/fontawesome-free/webfonts";
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  @responsive {
-    .text-2plusxl {
-      font-size: 1.6875rem;
-    }
-    .text-5plusxl {
-      font-size: 3.5rem;
-    }
-    .text-9xl {
-      font-size: 7rem;
-    }
-  }
-}
-
 .appbg {
   background-color: rgba(164, 80, 139, 0.9);
   background-image: linear-gradient(326deg, rgba(164, 80, 139, 0.9) 0%, rgba(95, 10, 135, 0.9) 74%),

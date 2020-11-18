@@ -130,9 +130,9 @@ defmodule ChessmatchWeb.GameLive do
 
   defp piece_color(color) do
     if color == :black do
-      "bg-gradient-to-b from-gray-700 to-gray-900 bg-clip-text text-transparent"
+      "bg-gradient-to-b from-gray-600 to-gray-900 bg-clip-text text-transparent"
     else
-      "bg-gradient-to-b from-gray-200 to-gray-500 bg-clip-text text-transparent"
+      "bg-gradient-to-b from-gray-100 to-gray-400 bg-clip-text text-transparent"
     end
   end
 end

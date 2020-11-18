@@ -1,9 +1,9 @@
 <div class="w-screen h-screen appbg flex flex-col">
-  <div class="flex-grow flex flex-col items-center justify-center space-y-4 md:space-y-8">
-   <p class="font-bold text-5xl md:text-9xl bg-gradient-to-br from-gray-400 to-gray-600 bg-clip-text text-transparent">Chessmatch <span class="fas fa-chess-rook"></span></p>
-    <button phx-click="find_game" class="text-1xl md:text-4xl md:w-1/4 rounded-lg py-3 md:py-5 px-5 border-4 border-gray-400 border-opacity-75 text-gray-400 tracking-wider font-medium">
+  <div class="flex-grow flex flex-col items-center justify-center space-y-6 md:space-y-10">
+   <p class="font-bold text-5xl md:text-9xl bg-gradient-to-br from-gray-300 to-gray-500 bg-clip-text text-transparent">Chessmatch <span class="fas fa-chess-rook"></span></p>
+    <button phx-click="find_game" class="text-1xl md:text-4xl md:w-1/4 rounded-lg py-3 md:py-6 px-5 border-4 border-gray-300 border-opacity-75 text-gray-300 tracking-wider font-medium">
         <%= if @finding_game do %> <span class="animate-spin fas fa-spinner"></span> Finding Game <% else %> <span class="fas fa-search"> <span class="font-medium font-sans">Find Game</span> <% end %>
     </button>
   </div>
-  <a href="https://github.com/JMS55/chessmatch" class="md:text-3xl text-gray-400 font-medium mb-4 mr-6 self-end"><span class="fab fa-github"></span> Open Source</a>
+  <a href="https://github.com/JMS55/chessmatch" class="md:text-3xl text-gray-300 font-medium mb-4 md:mb-5 mr-6 self-end"><span class="fab fa-github"></span> Open Source</a>
 </div>
