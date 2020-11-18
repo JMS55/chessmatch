@@ -11,8 +11,8 @@
     <%= for {i, color, piece} <- @board do %>
       <button
         class="w-10 h-10 bm:w-16 bm:h-16 bl:w-20 bl:h-20 <%= if rem(i, 2) != rem(div(i, 8), 2) do %> bg-gradient-to-tl from-gray-500 to-gray-600 <% else %> bg-gradient-to-tl from-teal-600 to-teal-700 <% end %>
-        text-2xl bm:text-4xl bl:text-5xl rounded shadow-xl <%= if selectable?(i, @selection, @possible_moves) do %> border-2 bl:border-4 border-gray-200 border-opacity-50 <% end %>"
-        <%= if selectable?(i, @selection, @possible_moves) do %>
+        text-2xl bm:text-4xl bl:text-5xl rounded shadow-xl <%= border(i, @selection, @possible_moves) %>"
+        <%= if selectable?(i, @selection, @possible_moves) > 0 do %>
           phx-click="select_piece" phx-value-selection=<%= i %>
         <% else %>
           disabled

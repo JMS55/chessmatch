@@ -4,10 +4,7 @@
         * Button hover/click
         * Piece moving
     * Change favicon color/design when it's your turn
-2. UX
-    * Click another piece to switch to that
-    * Click other places to deselect
-3. Make sure to use released binbo version, and not git
+2. Make sure to use released binbo version, and not git
 
 
 1. Handle leavers - In game or in queue

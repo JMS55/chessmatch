@@ -60,12 +60,17 @@ defmodule ChessmatchWeb.GameLive do
   def handle_event("select_piece", %{"selection" => selection}, socket) do
     {selection, _} = Integer.parse(selection)
 
+    selected_other_piece = Map.has_key?(socket.assigns.possible_moves, selection)
+
     case socket.assigns.selection do
       {nil, nil} ->
         {:noreply, assign(socket, :selection, {selection, nil})}
 
       {from, nil} when from == selection ->
         {:noreply, assign(socket, :selection, {nil, nil})}
+
+      {_from, nil} when selected_other_piece ->
+        {:noreply, assign(socket, :selection, {selection, nil})}
 
       {from, nil} ->
         :binbo.index_move(socket.assigns.game_instance, from, selection)
@@ -99,9 +104,27 @@ defmodule ChessmatchWeb.GameLive do
 
   defp selectable?(i, selection, possible_moves) do
     case selection do
-      {nil, nil} -> Map.has_key?(possible_moves, i)
-      {from, nil} -> i == from or MapSet.member?(possible_moves[from], i)
-      _ -> false
+      {nil, nil} ->
+        if Map.has_key?(possible_moves, i) do
+          2
+        else
+          0
+        end
+
+      {from, nil} ->
+        cond do
+          i == from or MapSet.member?(possible_moves[from], i) -> 1
+          Map.has_key?(possible_moves, i) -> 2
+          true -> 0
+        end
+    end
+  end
+
+  defp border(i, selection, possible_moves) do
+    case selectable?(i, selection, possible_moves) do
+      0 -> ""
+      1 -> "border-2 bl:border-4 border-blue-500 border-opacity-75"
+      2 -> "border-2 bl:border-4 border-gray-200 border-opacity-50"
     end
   end
 
