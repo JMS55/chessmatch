@@ -7,7 +7,7 @@
 ### Deploy to a Server:
 1. Setup a DNS record to point to your server's public IP address
 2. Setup a firewall to only allow `SSH/HTTP/HTTPS` inbound connections
-3. Install elixir v1.10+, erlang, node v12.13+, and caddy
+3. Install elixir v1.10+, erlang, node 14+, and caddy
 4. `git clone https://github.com/JMS55/chessmatch && cd chessmatch`
 5. `Replace "chessmatch.cf" with your domain in /install/Caddyfile and /config/prod.exs`
 6. `cd install && bash install.sh`
