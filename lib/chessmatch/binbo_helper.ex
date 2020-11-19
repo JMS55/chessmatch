@@ -2,15 +2,15 @@ defmodule Chessmatch.BinboHelper do
   def get_board(role, game_instance) do
     {:ok, pieces_list} = :binbo.get_pieces_list(game_instance, :index)
 
-    if role == :white do
-      pieces_list
-      |> fill_in_pieces_list
-      |> Enum.sort_by(fn {i, _, _} -> div(63 - i, 8) * 8 + (7 - rem(63 - i, 8)) end)
-    else
+    if role == :black do
       pieces_list
       |> fill_in_pieces_list
       |> Enum.sort_by(fn {i, _, _} -> div(63 - i, 8) * 8 + (7 - rem(63 - i, 8)) end)
       |> Enum.reverse()
+    else
+      pieces_list
+      |> fill_in_pieces_list
+      |> Enum.sort_by(fn {i, _, _} -> div(63 - i, 8) * 8 + (7 - rem(63 - i, 8)) end)
     end
   end
 
