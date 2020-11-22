@@ -1,9 +1,9 @@
 1. Improve frontend design
     * Forfeit dialog
-    * Animations
-        * Button hover/click
-        * Piece moving
-    * Change favicon color/design when it's your turn
+    * Animate recently changed board pieces
+    * Show possible moves on piece hover
+    * Add badge to favicon when it's your turn (use js library maybe)
+    * Fix board scaling
 2. Make sure to use released binbo version, and not git
 
 
