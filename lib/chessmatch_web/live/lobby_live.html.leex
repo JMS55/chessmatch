@@ -1,7 +1,7 @@
 <div class="w-screen h-screen appbg flex flex-col">
   <div class="flex-grow flex flex-col items-center justify-center space-y-6 md:space-y-10">
    <p class="font-bold text-5xl md:text-9xl bg-gradient-to-br from-gray-300 to-gray-500 bg-clip-text text-transparent">Chessmatch <span class="fas fa-chess-rook"></span></p>
-    <button phx-click="find_game" class="text-1xl md:text-4xl md:w-1/4 rounded-lg py-3 md:py-6 px-5 border-4 border-gray-300 border-opacity-75 text-gray-300 tracking-wider font-medium">
+    <button phx-click="find_game" class="rounded-lg md:w-1/4 px-5 py-3 md:py-6 border-4 border-gray-300 border-opacity-75 text-1xl md:text-4xl text-gray-300 tracking-wider font-medium">
         <%= if @finding_game do %> <span class="animate-spin fas fa-spinner"></span> Finding Game <% else %> <span class="fas fa-search"> <span class="font-medium font-sans">Find Game</span> <% end %>
     </button>
   </div>

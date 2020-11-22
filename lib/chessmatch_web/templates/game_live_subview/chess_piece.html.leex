@@ -1,0 +1,9 @@
+<%= case @piece do %>
+  <% :pawn -> %> <span class="fas fa-chess-pawn <%= piece_color(@color) %>"></span>
+  <% :rook -> %> <span class="fas fa-chess-rook <%= piece_color(@color) %>"></span>
+  <% :knight -> %> <span class="fas fa-chess-knight <%= piece_color(@color) %>"></span>
+  <% :bishop -> %> <span class="fas fa-chess-bishop <%= piece_color(@color) %>"></span>
+  <% :queen -> %> <span class="fas fa-chess-queen <%= piece_color(@color) %>"></span>
+  <% :king -> %> <span class="fas fa-chess-king <%= piece_color(@color) %>"></span>
+  <% _ -> %>
+<% end %>

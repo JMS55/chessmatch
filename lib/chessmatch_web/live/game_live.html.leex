@@ -9,25 +9,7 @@
 
   <div class="grid grid-cols-8 gap-1 bm:gap-2">
     <%= for {i, color, piece} <- @board do %>
-      <button
-        class="w-10 h-10 bm:w-16 bm:h-16 bl:w-20 bl:h-20 <%= if rem(i, 2) != rem(div(i, 8), 2) do %> bg-gradient-to-tl from-gray-400 to-gray-500 <% else %> bg-gradient-to-tl from-teal-600 to-teal-700 <% end %>
-        text-2xl bm:text-4xl bl:text-5xl rounded shadow-xl <%= border(i, @selection, @possible_moves) %>"
-        <%= if selectable?(i, @selection, @possible_moves) > 0 do %>
-          phx-click="select_piece" phx-value-selection=<%= i %>
-        <% else %>
-          disabled
-        <% end %>
-      >
-          <%= case piece do %>
-            <% :pawn -> %> <span class="fas fa-chess-pawn <%= piece_color(color) %>"></span>
-            <% :rook -> %> <span class="fas fa-chess-rook <%= piece_color(color) %>"></span>
-            <% :knight -> %> <span class="fas fa-chess-knight <%= piece_color(color) %>"></span>
-            <% :bishop -> %> <span class="fas fa-chess-bishop <%= piece_color(color) %>"></span>
-            <% :queen -> %> <span class="fas fa-chess-queen <%= piece_color(color) %>"></span>
-            <% :king -> %> <span class="fas fa-chess-king <%= piece_color(color) %>"></span>
-            <% _ -> %>
-          <% end %>
-      </button>
+      <%= render ChessmatchWeb.GameLiveSubview, "chess_square.html", selection: @selection, possible_moves: @possible_moves, i: i, piece: piece, color: color %>
     <% end %>
   </div>
 
