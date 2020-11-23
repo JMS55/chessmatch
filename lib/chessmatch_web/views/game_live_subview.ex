@@ -33,10 +33,10 @@ defmodule ChessmatchWeb.GameLiveSubview do
         ""
 
       1 ->
-        "border-2 bl:border-4 border-blue-500 border-opacity-75 transform transition-transform hover:scale-110"
+        "border-2 bl:border-4 border-blue-500 border-opacity-75 transform transition-transform bm:hover:scale-110"
 
       2 ->
-        "border-2 bl:border-4 border-gray-200 border-opacity-50 transform transition-transform hover:scale-110"
+        "border-2 bl:border-4 border-gray-200 border-opacity-50 transform transition-transform bm:hover:scale-110"
     end
   end
 end

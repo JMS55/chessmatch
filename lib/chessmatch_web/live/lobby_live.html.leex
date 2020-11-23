@@ -3,7 +3,7 @@
    <p class="font-bold text-5xl md:text-9xl bg-gradient-to-br from-gray-300 to-gray-500 bg-clip-text text-transparent">Chessmatch <span class="fas fa-chess-rook"></span></p>
     <button phx-click="find_game"
       class="rounded-lg md:w-1/4 px-5 py-3 md:py-6 border-2 md:border-4 border-gray-300 border-opacity-75 text-1xl md:text-4xl text-gray-300 tracking-wider font-medium
-      <%= if not @finding_game do %> transform transition-transform hover:scale-105 <% end %>"
+      <%= if not @finding_game do %> transform transition-transform md:hover:scale-105 <% end %>"
     >
         <%= if @finding_game do %> <span class="animate-spin fas fa-spinner"></span> Finding Game <% else %> <span class="fas fa-search"> <span class="font-medium font-sans">Find Game</span> <% end %>
     </button>

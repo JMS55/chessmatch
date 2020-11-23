@@ -16,14 +16,14 @@
   <div class="flex flex-row mt-6 bl:mt-8 space-x-4">
     <button
       onclick="navigator.clipboard.writeText('<%= @spectator_link %>')"
-      class="transform transition-all hover:translate-y-1 shadow rounded-full w-32 md:w-52 px-4 py-2 bl:px-5 bl:py-3 text-xs bm:text-base font-semibold text-white bg-gradient-to-r from-gray-600 to-gray-800">
+      class="transform transition-all bm:hover:translate-y-1 shadow rounded-full w-32 bm:w-52 px-4 py-2 bl:px-5 bl:py-3 text-xs bm:text-base font-semibold text-white bg-gradient-to-r from-gray-600 to-gray-800">
       <span class="fas fa-link"></span> Spectator Link
     </button>
 
     <%= if @role != :spectator do %>
       <button
         phx-click="toggle_forfeit_dialog"
-        class="transform transition-all hover:translate-y-1 shadow rounded-full w-32 md:w-52 px-4 py-2 bl:px-5 bl:py-3 text-xs bm:text-base font-semibold text-white bg-gradient-to-r from-red-500 to-red-700">
+        class="transform transition-all bm:hover:translate-y-1 shadow rounded-full w-32 bm:w-52 px-4 py-2 bl:px-5 bl:py-3 text-xs bm:text-base font-semibold text-white bg-gradient-to-r from-red-500 to-red-700">
         <span class="fas fa-flag"></span> Forfeit Match
       </button>
     <% end %>
