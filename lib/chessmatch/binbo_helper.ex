@@ -44,6 +44,13 @@ defmodule Chessmatch.BinboHelper do
           "Black Wins! - Checkmate"
         end
 
+      {:winner, winner, {:manual, :forfeit}} ->
+        if winner == :black do
+          "Black Wins! - White Forfeit"
+        else
+          "White Wins! - Black Forfeit"
+        end
+
       {:draw, :stalemate} ->
         "Draw - Stalemate"
 
@@ -57,11 +64,7 @@ defmodule Chessmatch.BinboHelper do
         "Draw - Threefold Repetition"
 
       {:draw, {:manual, reason}} ->
-        if reason == "White Wins! - Black Forfeit" or reason == "Black Wins! - White Forfeit" do
-          reason
-        else
-          "Draw - #{reason}"
-        end
+        "Draw - #{reason}"
     end
   end
 

@@ -1,6 +1,4 @@
 /* This file is for your main application css. */
-@import "../node_modules/nprogress/nprogress.css";
-
 $fa-font-path: "../node_modules/@fortawesome/fontawesome-free/webfonts";
 @import "../node_modules/@fortawesome/fontawesome-free/scss/fontawesome";
 @import "../node_modules/@fortawesome/fontawesome-free/scss/solid";
@@ -10,6 +8,28 @@ $fa-font-path: "../node_modules/@fortawesome/fontawesome-free/webfonts";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@variants responsive {
+  .inset-shadow1 {
+    box-shadow: inset 0 0 13px rgba(255, 153, 0, 0.5);
+  }
+
+  .inset-shadow2 {
+    box-shadow: inset 0 0 7px rgba(255, 208, 0, 0.4);
+  }
+
+  .inset-shadow1-big {
+    box-shadow: inset 0 0 25px rgba(255, 153, 0, 0.5);
+  }
+
+  .inset-shadow2-big {
+    box-shadow: inset 0 0 15px rgba(255, 208, 0, 0.4);
+  }
+}
+
+iframe[src="/phoenix/live_reload/frame"] {
+  display: none;
+}
 
 .appbg {
   background-color: rgba(164, 80, 139, 0.9);

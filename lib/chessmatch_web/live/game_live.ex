@@ -2,22 +2,21 @@ defmodule ChessmatchWeb.GameLive do
   use ChessmatchWeb, :live_view
 
   @impl true
-  def mount(%{"game_id" => game_id}, _session, socket) do
-    with {game_id, ""} <- Integer.parse(game_id),
-         {:ok, {role, game_instance, spectator_id}} <-
-           Chessmatch.GameManager.get_game_info(game_id) do
+  def mount(%{"role_id" => role_id}, _session, socket) do
+    with {role_id, ""} <- Integer.parse(role_id),
+         {:ok, {role, spectator_id, game_instance, last_move}} <-
+           Chessmatch.GameManager.get_initial_info(role_id) do
       spectator_link = Routes.live_url(socket, ChessmatchWeb.GameLive, spectator_id)
 
       socket =
         socket
         |> assign(:role, role)
-        |> assign(:game_instance, game_instance)
         |> assign(:spectator_link, spectator_link)
+        |> assign(:game_instance, game_instance)
+        |> assign(:last_move, last_move)
         |> assign(:selection, {nil, nil})
         |> assign(:forfeit_dialog_open, false)
         |> update_state()
-
-      Process.send_after(self(), :update_state, 1000)
 
       {:ok, socket}
     else
@@ -25,10 +24,13 @@ defmodule ChessmatchWeb.GameLive do
     end
   end
 
+  def update_game_info(pid, {_, last_move}) do
+    Process.send(pid, {:update_game_info, last_move}, [])
+  end
+
   @impl true
-  def handle_info(:update_state, socket) do
-    socket = update_state(socket)
-    Process.send_after(self(), :update_state, 1000)
+  def handle_info({:update_game_info, last_move}, socket) do
+    socket = socket |> assign(:last_move, last_move) |> update_state()
     {:noreply, socket}
   end
 
@@ -71,9 +73,11 @@ defmodule ChessmatchWeb.GameLive do
         {:noreply, assign(socket, :selection, {selection, nil})}
 
       {from, nil} ->
-        :binbo.index_move(socket.assigns.game_instance, from, selection)
+        game_instance = socket.assigns.game_instance
+        :binbo.index_move(game_instance, from, selection)
+        Chessmatch.GameManager.move_piece(game_instance, {from, selection})
 
-        socket = socket |> update_state() |> assign(:selection, {nil, nil})
+        socket = socket |> assign(:selection, {nil, nil})
         {:noreply, socket}
     end
   end
@@ -88,14 +92,15 @@ defmodule ChessmatchWeb.GameLive do
   def handle_event("forfeit_match", _, socket) do
     socket = assign(socket, :forfeit_dialog_open, not socket.assigns.forfeit_dialog_open)
 
-    :binbo.game_draw(
-      socket.assigns.game_instance,
+    winner =
       if socket.assigns.role == :black do
-        "White Wins! - Black Forfeit"
+        :white
       else
-        "Black Wins! - White Forfeit"
+        :black
       end
-    )
+
+    :binbo.set_game_winner(socket.assigns.game_instance, winner, :forfeit)
+    Chessmatch.GameManager.move_piece(socket.assigns.game_instance, socket.assigns.last_move)
 
     {:noreply, update_state(socket)}
   end

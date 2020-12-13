@@ -19,6 +19,26 @@ defmodule ChessmatchWeb.GameLiveSubview do
     end
   end
 
+  defp square_color(i, last_move) do
+    if rem(i, 2) != rem(div(i, 8), 2) do
+      case last_move do
+        {m1, m2} when i == m1 or i == m2 ->
+          "bg-gradient-to-tl from-gray-400 to-gray-500 inset-shadow2 bl:inset-shadow2-big"
+
+        _ ->
+          "bg-gradient-to-tl from-gray-400 to-gray-500"
+      end
+    else
+      case last_move do
+        {m1, m2} when i == m1 or i == m2 ->
+          "bg-gradient-to-tl from-teal-600 to-teal-700 inset-shadow1 bl:inset-shadow1-big"
+
+        _ ->
+          "bg-gradient-to-tl from-teal-600 to-teal-700"
+      end
+    end
+  end
+
   defp piece_color(color) do
     if color == :black do
       "bg-gradient-to-b from-gray-600 to-gray-900 bg-clip-text text-transparent"

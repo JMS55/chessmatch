@@ -1,16 +1,17 @@
 1. Improve frontend design
     * Forfeit dialog
-    * Animate recently changed board pieces
-    * Show possible moves on piece hover
-    * Add badge to favicon when it's your turn (use js library maybe)
     * Fix board scaling
+        * https://play.tailwindcss.com/MQr6OlQD5w
 2. Make sure to use released binbo version, and not git
 
 
-1. Handle leavers - In game or in queue
-2. Optimize app size
-3. Scores (Capturing a pawn is +1, etc)
+1. Add badge to favicon when it's your turn (use js library maybe)
+2. Preview possible moves on piece hover, before selection
+    * Or maybe use drag and drop?
+3. Optimize app size
+4. Scores (Capturing a pawn is +1, etc)
 
 
-1. Turn timer
-2. Sound/Music
+1. Accounts
+2. Turn timers
+3. Handle leavers - In game or in queue

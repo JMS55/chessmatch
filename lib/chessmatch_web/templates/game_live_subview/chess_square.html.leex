@@ -1,8 +1,8 @@
 <button
   class="w-10 bm:w-16 bl:w-20 h-10 bm:h-16 bl:h-20 text-2xl bm:text-4xl bl:text-5xl rounded shadow-xl
-         bg-gradient-to-tl <%= if rem(@i, 2) != rem(div(@i, 8), 2) do %> from-gray-400 to-gray-500 <% else %> from-teal-600 to-teal-700 <% end %>
+         <%= square_color(@i, @last_move) %>
          <%= border(@i, @selection, @possible_moves) %>"
-  <%= if selectable?(@i, @selection, @possible_moves) > 0 do %> phx-click="select_piece" phx-value-selection=<%= @i %>  <% else %> disabled <% end %>
+  <%= if selectable?(@i, @selection, @possible_moves) > 0 do %> phx-click="select_piece" phx-value-selection=<%= @i %> <% else %> disabled <% end %>
 >
   <%= render ChessmatchWeb.GameLiveSubview, "chess_piece.html", piece: @piece, color: @color %>
 </button>

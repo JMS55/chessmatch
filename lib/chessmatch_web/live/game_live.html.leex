@@ -9,7 +9,7 @@
 
   <div class="grid grid-cols-8 gap-1 bm:gap-2">
     <%= for {i, color, piece} <- @board do %>
-      <%= render ChessmatchWeb.GameLiveSubview, "chess_square.html", selection: @selection, possible_moves: @possible_moves, i: i, piece: piece, color: color %>
+      <%= render ChessmatchWeb.GameLiveSubview, "chess_square.html", selection: @selection, possible_moves: @possible_moves, last_move: @last_move, i: i, piece: piece, color: color %>
     <% end %>
   </div>
 
